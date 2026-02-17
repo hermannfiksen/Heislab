@@ -3,24 +3,53 @@
 #include <signal.h>
 #include <time.h>
 #include "driver/elevio.h"
+#include "start.h"
 
+//potesielt ikke nødvendig
+#include "order.h"
+#include "movement.h"
+#include "queue.h"
+#include "door.h"
 
 
 int main(){
     elevio_init();
-    
-    printf("=== Example Program ===\n");
+    printf("===Starting elevetor ===\n");
     printf("Press the stop button on the elevator panel to exit\n");
+    
+    start_init(); 
 
-    elevio_motorDirection(DIRN_UP);
 
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
     while(1){
         int floor = elevio_floorSensor();
-
+    
         if(floor == 0){
             elevio_motorDirection(DIRN_UP);
         }
-
+        
         if(floor == N_FLOORS-1){
             elevio_motorDirection(DIRN_DOWN);
         }
@@ -44,8 +73,8 @@ int main(){
             break;
         }
         
-        nanosleep(&(struct timespec){0, 20*1000*1000}, NULL);
+    
+        nanosleep(&(struct timespec){0, 20*1000*1000}, NULL); 
+        //EGET TEST OMRÅDE
     }
-
-    return 0;
-}
+    */
