@@ -1,0 +1,1 @@
+//fyltte på heis, sende hvilken etasje den er i til oreder.
