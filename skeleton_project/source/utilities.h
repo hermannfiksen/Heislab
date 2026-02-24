@@ -7,6 +7,7 @@ typedef struct{
     Order arr[MAX_SIZE];
     int head;
     int tail;
+    int size;
 } Queue;
 
 void init_queue(Queue *q);
