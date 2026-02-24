@@ -1,6 +1,7 @@
 //holder styr på køen og sender neste etasje mål til movement
 #pragma once
 #include "order.h"
+#define MAX_SIZE 10
 
 Order order_queue[10] = {0, 5}; //a static array with room for all buttons beeing pressed at the same time
 Order *p_currentOrder = &order_queue[0];// pointer to first object in queue

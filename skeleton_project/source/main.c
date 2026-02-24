@@ -10,6 +10,7 @@
 #include "movement.h"
 #include "queue.h"
 #include "door.h"
+#include "utilities.h"
 
 
 int main(){
