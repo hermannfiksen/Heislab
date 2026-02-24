@@ -1,8 +1,6 @@
 #include "queue.h"
-void set_button_light(int floor, ButtonType button, int value){ 
-    //value 1 = on, 0 = off 
-    elevio_buttonLamp(floor, button, value);
-}
+
+
 
 void add_order_to_queue(Order order){
     if(legal_request(order)){
@@ -28,4 +26,18 @@ int order_equal(Order order1, Order order2){
         return 1;
     }
     return 0;
+}
+
+
+void set_button_light(int value){ 
+    //value 1 = on, 0 = off 
+    if(order_queue.size > 0){
+        int i = order_queue.head;
+        while(i <= order_queue.tail){
+            // iterating through elements in queue and setting lights
+            elevio_buttonLamp(order_queue.arr[i].floor, order_queue.arr[i].button, value); 
+            i = (i+1) %MAX_SIZE;   
+        }
+    }
+    
 }

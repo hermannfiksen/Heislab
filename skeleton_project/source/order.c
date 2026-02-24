@@ -1,8 +1,14 @@
 #include "order.h"
+
+
 void elevator_run(){
+    // main loop for elevator system
+    
+
     while(1){
         nanosleep(&(struct timespec){0, 20*1000*1000}, NULL); 
         check_for_orders();
+
         if(stop_hms()){
             break;
         }
@@ -17,8 +23,9 @@ void check_for_orders(){
             for(int b = 0; b < N_BUTTONS; b++){
                 int btnPressed = elevio_callButton(f, b);
                 if(btnPressed){
+                    // when input is registered, make order and send to queue-file
                     Order new_order = {b, f};
-//sends til queueu på en lur måte
+                    add_order_to_queue(new_order);
                 }
             }
         }
