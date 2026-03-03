@@ -1,16 +1,14 @@
-#include <stdio.h>
+
 #include <stdlib.h>
 #include <signal.h>
-#include <time.h>
-#include "driver/elevio.h"
 #include "start.h"
 
 //potesielt ikke nødvendig
-#include "order.h"
+
 #include "movement.h"
 #include "queue.h"
-#include "door.h"
-#include "utilities.h"
+
+
 
 
 int main(){
@@ -18,8 +16,17 @@ int main(){
     printf("===Starting elevetor ===\n");
     printf("Press the stop button on the elevator panel to exit\n");
     
-    start_init(); 
+    elevio_doorOpenLamp(0);
+    
+    for(int f = 0; f < N_FLOORS; f++){
+            for(int b = 0; b < N_BUTTONS; b++){
+                int btnPressed = elevio_callButton(f, b);
+                elevio_buttonLamp(f, b, btnPressed);
+            }
+        }
 
+    start_init(); 
+    elevator_run();
 
     return 0;
 }
