@@ -18,8 +18,6 @@ void elevator_run(){
         check_for_orders();
         
         if(stop_hms()){
-            free(queue_pointer);
-            queue_pointer = NULL;
             break;
         }
         
@@ -121,3 +119,11 @@ void set_button_light(int value){
     } 
 }
 
+/*
+TODO:
+Fikse order size,
+obstrukjson
+stop, med bestillingslogikk støff, 
+logikk for heis, ignorere andre motor dir blablabla
+når i etasje ta alle ordre i den etasjen
+*/

@@ -3,6 +3,7 @@
 #include "order.h"
 #include "movement.h"
 #include "stdio.h"
+#include <stdlib.h> 
 
 void elevator_run();
 
