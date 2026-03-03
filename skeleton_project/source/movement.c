@@ -1,3 +1,4 @@
+#define _POSIX_C_SOURCE 200809L
 #include "movement.h"
 
 int g_current_floor;
@@ -29,6 +30,7 @@ bool at_destination(int floor){
 
     if(g_current_floor == floor){
         elevio_motorDirection(DIRN_STOP);
+
         return true;
     }
     return false;
@@ -42,4 +44,11 @@ void set_current_floor(){
     if(elevio_floorSensor() != -1){
         g_current_floor = elevio_floorSensor();
     }
+}
+
+
+long long time_now(){
+    struct timespec t;
+    clock_gettime(CLOCK_MONOTONIC, &t);
+    return (long long)t.tv_sec * 1000LL + t.tv_nsec / 1000000LL;
 }
