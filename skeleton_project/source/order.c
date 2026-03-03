@@ -3,10 +3,7 @@
 
 int stop_hms(){
     int stop = 0;
-    if(elevio_stopButton()){
-        stop = 1;
-    }
-    if(elevio_obstruction()){
+    if(elevio_stopButton() && elevio_obstruction()){
         stop = 1;
     }
     return stop;

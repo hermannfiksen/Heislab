@@ -13,29 +13,31 @@ void elevator_run(){
     while(1){
         nanosleep(&(struct timespec){0, 20*1000*1000}, NULL); 
         set_current_floor();
-        check_for_orders();
         set_button_light(1);
         set_floor_light();
+        check_for_orders();
         
         if(stop_hms()){
             break;
         }
-
+        
         //test
         printf("ordersize = %d  \n",order_queue.size);
         //test over
-
+        
         if(time_now() >= wait_until){
             waiting = 0;
         }else{
             waiting = 1;
         }
-
+        if(waiting && elevio_obstruction()){
+            wait_until = time_now() + 2000;
+        }
         if(!waiting){
             if(order_queue.size == 0){
                 elevio_motorDirection(DIRN_STOP);
             }
-
+            
             if(order_done && order_queue.size != 0){
                 // check if last order is done & there are orders in queue
                 active_order = get_next_order(queue_pointer);
@@ -43,14 +45,14 @@ void elevator_run(){
                 order_done = 0;
                 
             }
-
+            
             if(!order_done){
                 order_done = at_destination(active_order.floor);
                 if(order_done){
                     // at destination. remove order
                     remove_order(queue_pointer);
                     elevio_buttonLamp(active_order.floor,active_order.button,0);
-
+                    
                     waiting = 1;
                     wait_until = time_now() + 2000;
                 }
@@ -91,9 +93,11 @@ int legal_request(Order pot_order){
     }
     for(int i = order_queue.tail; i != order_queue.head; i = (i + 1)% MAX_SIZE){
         if(order_equal(order_queue.arr[i],pot_order)){
+            elevio_doorOpenLamp(1);
             return 0;
         }
     }
+    elevio_doorOpenLamp(0);
     return 1;
 }
 

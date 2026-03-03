@@ -17,9 +17,6 @@ void go_to_floor(int floor){
     }
     
     elevio_motorDirection(dir);
-
-    // if(CallBack i et floor):
-    //      change_lights
 }
 
 bool at_destination(int floor){
