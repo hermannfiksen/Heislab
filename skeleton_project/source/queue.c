@@ -18,6 +18,8 @@ void elevator_run(){
         check_for_orders();
         
         if(stop_hms()){
+            free(queue_pointer);
+            queue_pointer = NULL;
             break;
         }
         
